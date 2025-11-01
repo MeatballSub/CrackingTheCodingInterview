@@ -11,6 +11,7 @@ pub mod unit_test {
 
     #[test]
     fn test_is_unique() {
+        println!('test');
         let test_cases = read_test_cases();
         for ref test_case in test_cases {
             let actual = is_unique(&test_case.input);
