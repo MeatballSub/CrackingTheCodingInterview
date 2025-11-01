@@ -1,0 +1,26 @@
+[
+    {
+        "input": "",
+        "answer": true
+    },
+    {
+        "input": "a",
+        "answer": true
+    },
+    {
+        "input": "aa",
+        "answer": false
+    },
+    {
+        "input": "ab",
+        "answer": true
+    },
+    {
+        "input": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;',./~!@#$%^&*()_+{}|:\"<>?",
+        "answer": true
+    },
+    {
+        "input": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`-=[]\\;',./~!@#$%^&*()_+{}|:\"<>?a",
+        "answer": false
+    }
+]
