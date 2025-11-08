@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 pub mod test;
-
+//chapter 1, page 91 of Cracking the Coding Interview 6th Edition
 pub fn palindrome_permutation(string: &str) -> bool {
     if string.len() <= 1  {
         return true
