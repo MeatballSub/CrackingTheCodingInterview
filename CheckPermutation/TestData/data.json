@@ -35,6 +35,11 @@
         "answer": false
     },
     {
+        "input1": "abb",
+        "input2": "baa",
+        "answer": false
+    },
+    {
         "input1": "ab",
         "input2": "bab",
         "answer": false
