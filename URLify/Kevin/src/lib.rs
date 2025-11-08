@@ -1,6 +1,6 @@
 pub mod test;
 
-pub fn urlify(string: &Vec<char>, true_length: usize) -> Vec<char> {
+pub fn urlify(string: &mut Vec<char>, true_length: usize) -> &Vec<char> {
     todo!("Implement this function")
 }
 
@@ -12,10 +12,11 @@ pub mod unit_test {
     #[test]
     fn test_urlify() {
         let test_cases = read_test_cases();
-        for ref test_case in test_cases {
-            let actual = urlify(&test_case.input_string, test_case.input_true_length);
+        for ref mut test_case in test_cases {
+            let mut input_string = test_case.input_string.clone();
+            let actual = urlify(&mut input_string, test_case.input_true_length);
             assert_eq!(
-                actual,
+                *actual,
                 test_case.answer,
                 "input: '{},{}', expected: {}, actual: {}",
                 String::from_iter(test_case.input_string.clone()),

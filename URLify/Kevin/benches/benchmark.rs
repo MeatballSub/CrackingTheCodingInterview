@@ -11,8 +11,9 @@ fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("urlify", |b| {
         b.iter(|| {
             for test_case in &test_cases {
+                let mut input_string = test_case.input_string.clone();
                 urlify(
-                    black_box(&test_case.input_string),
+                    black_box(&mut input_string),
                     black_box(test_case.input_true_length),
                 );
             }
