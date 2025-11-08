@@ -1,0 +1,42 @@
+[
+    {
+        "input1": "",
+        "input2": "",
+        "answer": true
+    },
+    {
+        "input1": "a",
+        "input2": "a",
+        "answer": true
+    },
+    {
+        "input1": "ab",
+        "input2": "ba",
+        "answer": true
+    },
+    {
+        "input1": "abc",
+        "input2": "ba",
+        "answer": false
+    },
+    {
+        "input1": "ab   ",
+        "input2": "ba",
+        "answer": false
+    },
+    {
+        "input1": "abb",
+        "input2": "bab",
+        "answer": true
+    },
+    {
+        "input1": "abb",
+        "input2": "ba",
+        "answer": false
+    },
+    {
+        "input1": "ab",
+        "input2": "bab",
+        "answer": false
+    }
+]
