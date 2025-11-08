@@ -1,0 +1,34 @@
+[
+    {
+        "input": "",
+        "answer": true
+    },
+    {
+        "input": "Tact Coa",
+        "answer": true
+    },
+    {
+        "input": "a",
+        "answer": true
+    },
+    {
+        "input": "ab",
+        "answer": false
+    },
+    {
+        "input": "aaccerr",
+        "answer": true
+    },
+    {
+        "input": "aabbbcccdd",
+        "answer": false
+    },
+    {
+        "input": "abbcc",
+        "answer": true
+    },
+    {
+        "input": "abbcccdddd",
+        "answer": false
+    }
+]
