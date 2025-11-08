@@ -4,10 +4,6 @@ pub mod test;
 
 pub fn palindrome_permutation(string: &str) -> bool {
     if string.len() <= 1  {
-        println!("===============");
-        println!("short circuit evaluation");
-        println!("{:?}", string);
-        println!("===============");
         return true
     }
 
@@ -26,31 +22,18 @@ pub fn palindrome_permutation(string: &str) -> bool {
         *letter_freq.entry(*l).or_insert(0) += 1;
     });
 
-    let mut occurrence_of_one = 0;
-    let mut otherwise_symmetrical = false;
-
+    let mut uneven_frequency = 0;
     letter_freq.into_iter().for_each(|(key, val)| {
-        if val == 1{
-            occurrence_of_one +=1
-        } if val % 2 == 0 {
-            otherwise_symmetrical = true
-        } else {
-            otherwise_symmetrical = false
+        if val % 2 != 0 {
+           uneven_frequency += 1
         }
     });
    
-   
-    if occurrence_of_one == 1 && otherwise_symmetrical == true {
+    if uneven_frequency <= 1 {
         is_palindrome = true
     }
-    println!("===============");
-    println!("{:?}", string);
-    println!("{:?}", occurrence_of_one);
-    println!("{:?}", otherwise_symmetrical);
-    println!("{:?}", is_palindrome);
-    println!("===============");
+
     is_palindrome
-    
 }
 
 
