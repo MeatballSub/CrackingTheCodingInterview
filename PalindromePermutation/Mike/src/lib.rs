@@ -7,7 +7,7 @@ pub fn palindrome_permutation(string: &str) -> bool {
         return true
     }
 
-    let letters: Vec<_> = string.trim().to_lowercase().chars().filter(|c| !c.is_whitespace() && c.is_alphanumeric()).collect();
+    let letters: Vec<_> = string.trim().to_lowercase().chars().filter(|c| !c.is_whitespace() && c.is_alphabetic()).collect();
     let mut letter_freq: HashMap<char, u32> = HashMap::new();
     let mut is_palindrome = false;
 
