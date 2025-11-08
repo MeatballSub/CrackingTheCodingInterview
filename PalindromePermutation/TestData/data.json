@@ -28,6 +28,10 @@
         "answer": true
     },
     {
+        "input": "aabbccc",
+        "answer": true
+    },
+    {
         "input": "abbcccdddd",
         "answer": false
     }
