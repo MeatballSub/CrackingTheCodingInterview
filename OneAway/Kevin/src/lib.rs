@@ -1,6 +1,50 @@
 pub mod test;
 
-pub fn one_away(string1: &str, string2: &str) -> bool { todo!("Implement this function") }
+pub fn one_away(string1: &str, string2: &str) -> bool
+{
+    if string1.len().abs_diff(string2.len()) > 1
+    {
+        return false;
+    }
+
+    let (short, long) = if string1.len() < string2.len()
+    {
+        (string1.as_bytes(), string2.as_bytes())
+    }
+    else
+    {
+        (string2.as_bytes(), string1.as_bytes())
+    };
+
+    let short_len = short.len();
+    let long_len = long.len();
+    let same_size = short_len == long_len;
+
+    let mut i = 0;
+    let mut j = 0;
+    let mut found = false;
+    while i < short_len && j < long_len
+    {
+        if short[i] != long[j]
+        {
+            if found
+            {
+                return false;
+            }
+            found = true;
+            if same_size
+            {
+                i += 1;
+            }
+        }
+        else
+        {
+            i += 1;
+        }
+        j += 1;
+    }
+    true
+}
 
 #[cfg(test)]
 pub mod unit_test
