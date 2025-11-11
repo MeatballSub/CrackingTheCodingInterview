@@ -1,0 +1,57 @@
+[
+    {
+        "string1": "pale",
+        "string2": "ple",
+        "answer": true
+    },
+    {
+        "string1": "pales",
+        "string2": "pale",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "bale",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "bake",
+        "answer": false
+    },
+    {
+        "string1": "pale",
+        "string2": "ale",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "apale",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "pals",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "pal",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "pazle",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "pace",
+        "answer": true
+    },
+    {
+        "string1": "pale",
+        "string2": "bcdf",
+        "answer": false
+    },
+]
