@@ -1,0 +1,22 @@
+[
+    {
+        "string": "aabcccccaaa",
+        "answer": "a2b1c5a3"
+    },
+    {
+        "string": "aabcd",
+        "answer": "aabcd"
+    },
+    {
+        "string": "aabbcccdd",
+        "answer": "a2b2c3d2"
+    },
+    {
+        "string": "aabbcccd",
+        "answer": "aabbcccd"
+    },
+    {
+        "string": "abcd",
+        "answer": "abcd"
+    }
+]
