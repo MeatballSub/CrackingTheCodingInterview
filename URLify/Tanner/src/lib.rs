@@ -7,24 +7,15 @@ pub fn urlify(string: &mut Vec<char>, true_length: usize) -> &Vec<char> {
         string.remove(removal_index);
     }
 
-    let mut indexes: Vec<usize> = Vec::new();
-
-    // find the indexes of whitespaces
-    for (index, character) in string.clone().iter().enumerate() {
+    // iterate through the string in reverse order
+    // replace whitespace with "%20"
+    for (index, character) in string.clone().iter().enumerate().rev() {
         if character.is_whitespace() {
-            indexes.push(index);
+            string.remove(index);
+            string.insert(index, '0');
+            string.insert(index, '2');
+            string.insert(index, '%');
         }
-    }
-
-    // sort indexes in descending order
-    indexes.sort_by(|a, b| b.cmp(a));
-
-    // insert "%20" at each whitespace index
-    for index in indexes {
-        string.remove(index);
-        string.insert(index, '0');
-        string.insert(index, '2');
-        string.insert(index, '%');
     }
 
     string
