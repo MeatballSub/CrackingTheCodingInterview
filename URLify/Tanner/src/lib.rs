@@ -1,7 +1,33 @@
 pub mod test;
 
 pub fn urlify(string: &mut Vec<char>, true_length: usize) -> &Vec<char> {
-    todo!("Implement this function")
+    // remove trailing whitespace based on true length
+    for _i in 0..(string.len() - true_length) {
+        let removal_index = string.len() - 1;
+        string.remove(removal_index);
+    }
+
+    let mut indexes: Vec<usize> = Vec::new();
+
+    // find the indexes of whitespaces
+    for (index, character) in string.clone().iter().enumerate() {
+        if character.is_whitespace() {
+            indexes.push(index);
+        }
+    }
+
+    // sort indexes in descending order
+    indexes.sort_by(|a, b| b.cmp(a));
+
+    // insert "%20" at each whitespace index
+    for index in indexes {
+        string.remove(index);
+        string.insert(index, '0');
+        string.insert(index, '2');
+        string.insert(index, '%');
+    }
+
+    string
 }
 
 #[cfg(test)]
