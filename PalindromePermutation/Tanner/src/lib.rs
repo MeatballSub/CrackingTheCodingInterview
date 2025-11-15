@@ -24,7 +24,7 @@ pub fn palindrome_permutation(string: &str) -> bool {
         }
     }
 
-    num_odds % 2 != 0
+    num_odds <= 1
 }
 
 #[cfg(test)]
