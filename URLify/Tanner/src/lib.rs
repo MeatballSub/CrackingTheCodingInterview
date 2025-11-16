@@ -1,20 +1,32 @@
 pub mod test;
 
-pub fn urlify(string: &mut Vec<char>, true_length: usize) -> &Vec<char> {
-    // remove trailing whitespace based on true length
-    for _i in 0..(string.len() - true_length) {
-        let removal_index = string.len() - 1;
-        string.remove(removal_index);
+fn shift_and_insert(string: &mut Vec<char>, index: usize) -> &Vec<char> {
+    let end_index = string.len() - 1;
+
+    for i in 0..(string.len() - 2) {
+        let curr_index = end_index - i;
+        let swap_index = curr_index - 2;
+
+        if curr_index == index {
+            break;
+        }
+
+        string[curr_index] = string[swap_index];
     }
 
-    // iterate through the string in reverse order
-    // replace whitespace with "%20"
-    for (index, character) in string.clone().iter().enumerate().rev() {
+    string[index] = '%';
+    string[index + 1] = '2';
+    string[index + 2] = '0';
+
+    string
+}
+
+pub fn urlify(string: &mut Vec<char>, _true_length: usize) -> &Vec<char> {
+    for i in 0..string.len() {
+        let character = string[i];
+
         if character.is_whitespace() {
-            string.remove(index);
-            string.insert(index, '0');
-            string.insert(index, '2');
-            string.insert(index, '%');
+            shift_and_insert(string, i);
         }
     }
 
