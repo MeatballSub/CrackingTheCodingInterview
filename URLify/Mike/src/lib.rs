@@ -1,7 +1,54 @@
 pub mod test;
 
 pub fn urlify(string: &mut Vec<char>, true_length: usize) -> &Vec<char> {
-    todo!("Implement this function")
+    if string.is_empty() {
+        return string
+    }
+    let mut space_count = 0;
+    let mut new_length = 0;
+    let mut index = 0;
+
+    loop {
+        if index >= true_length
+        {
+            break;
+        }
+        if string[index].is_whitespace() {
+            space_count+=1;
+        }
+        index += 1;
+    }
+
+    if space_count == 0 {
+        return string
+    }
+
+    new_length = true_length + (space_count * 2);
+    string[new_length - 1] = '\0';
+
+    let mut index = true_length - 1;
+
+    loop
+    {
+        let ch = string[index];
+        if ch.is_whitespace () {
+            string[new_length - 1] = '0';
+            string[new_length - 2] = '2';
+            string[new_length - 3] = '%';
+            new_length -= 3;
+        } else {
+            string[new_length - 1] = string[index];
+            new_length -= 1;
+        }
+
+        if index == 0
+        {
+            break;
+        }
+        index -= 1;
+    }
+
+    string
 }
 
 #[cfg(test)]
