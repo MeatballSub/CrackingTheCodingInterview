@@ -1,6 +1,35 @@
 pub mod test;
+use std::collections::HashSet;
 
-pub fn one_away(string1: &str, string2: &str) -> bool { todo!("Implement this function") }
+pub fn one_away(string1: &str, string2: &str) -> bool {
+    let mut changes = 0;
+    let abs_diff = (string1.chars().count() as isize - string2.chars().count() as isize).abs();
+    if abs_diff > 1 {
+        return false;
+    }
+    // println!("ABS DIFF");
+    // println!("{:?}", abs_diff);
+    let string1_chars: HashSet<char> = string1.chars().collect();
+    let string2_chars: HashSet<char> = string2.chars().collect();
+    let mut unique_string_chars = Vec::new();
+
+    if string1.len() > string2.len() {
+        changes +=1;
+    }
+
+    string1_chars.iter().for_each(|c| {
+        if !string2_chars.contains(c){
+            unique_string_chars.push(*c);
+            changes +=1;
+        }
+    });
+
+    if abs_diff == 1 && unique_string_chars.len() <= 1 {
+        changes = 1;
+    }
+
+    changes <= 1
+}
 
 #[cfg(test)]
 pub mod unit_test
