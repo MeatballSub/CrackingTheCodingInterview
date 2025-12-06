@@ -53,5 +53,10 @@
         "string1": "pale",
         "string2": "bcdf",
         "answer": false
+    },
+    {
+        "string1": "elap",
+        "string2": "bale",
+        "answer": false
     }
 ]
