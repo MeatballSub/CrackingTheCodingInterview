@@ -4,27 +4,28 @@ use std::collections::HashSet;
 pub fn one_away(string1: &str, string2: &str) -> bool {
     let mut changes = 0;
     let abs_diff = (string1.chars().count() as isize - string2.chars().count() as isize).abs();
-    let mismatches = string1
-    .chars()
-    .zip(string2.chars())
-    .filter(|&(c1, c2)| c1 != c2)
-    .count();
 
     if abs_diff > 1  {
         return false;
-    }
-
-    if mismatches > 1 {
+    } else if abs_diff == 1 {
         changes += 1;
+    } else {
+        let mismatches = string1
+            .chars()
+            .zip(string2.chars())
+            .filter(|&(c1, c2)| {
+                println!("{:?}", c1);
+                println!("============");
+                println!("{:?}", c2);
+                c1 != c2
+            })
+            .count();
+        return mismatches <= 1;
     }
 
     let string1_chars: HashSet<char> = string1.chars().collect();
     let string2_chars: HashSet<char> = string2.chars().collect();
     let mut unique_string_chars = Vec::new();
-
-    if string1.len() > string2.len() {
-        changes +=1;
-    }
 
     string1_chars.iter().for_each(|c| {
         if !string2_chars.contains(c){
@@ -32,7 +33,6 @@ pub fn one_away(string1: &str, string2: &str) -> bool {
             changes +=1;
         }
     });
-
 
     if abs_diff == 1 && unique_string_chars.len() <= 1 {
         changes = 1;
