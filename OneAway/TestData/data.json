@@ -63,5 +63,10 @@
         "string1": "abcd",
         "string2": "dcba",
         "answer": false
+    },
+    {
+        "string1": "abcd",
+        "string2": "aaacd",
+        "answer": false
     }
 ]
