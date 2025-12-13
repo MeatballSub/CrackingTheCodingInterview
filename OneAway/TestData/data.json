@@ -58,5 +58,10 @@
         "string1": "elap",
         "string2": "bale",
         "answer": false
+    },
+    {
+        "string1": "abcd",
+        "string2": "dcba",
+        "answer": false
     }
 ]
