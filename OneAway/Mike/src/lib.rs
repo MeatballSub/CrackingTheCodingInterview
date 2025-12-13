@@ -1,44 +1,33 @@
 pub mod test;
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 
 pub fn one_away(string1: &str, string2: &str) -> bool {
-    let mut changes = 0;
     let abs_diff = (string1.chars().count() as isize - string2.chars().count() as isize).abs();
 
     if abs_diff > 1  {
         return false;
     } else if abs_diff == 1 {
-        changes += 1;
+        let largest_string = if string1.len() > string2.len() { string1} else { string2 };
+        let smallest_string = if string1.len() < string2.len() { string1} else { string2 };
+
+        let mut combinations = largest_string.chars().enumerate().map(|(i, c)| {
+            let mut new_string = largest_string.clone().to_string();
+            new_string.remove(i);
+            new_string
+        });
+
+        return combinations.any(|entry | entry == smallest_string.to_string());
+
     } else {
+
+        // try to do this but make it work for all examples.Basically incorporate above logic. use offset of length on larger string to determine how many changes away
         let mismatches = string1
             .chars()
             .zip(string2.chars())
-            .filter(|&(c1, c2)| {
-                println!("{:?}", c1);
-                println!("============");
-                println!("{:?}", c2);
-                c1 != c2
-            })
+            .filter(|&(c1, c2)| c1 != c2)
             .count();
         return mismatches <= 1;
     }
-
-    let string1_chars: HashSet<char> = string1.chars().collect();
-    let string2_chars: HashSet<char> = string2.chars().collect();
-    let mut unique_string_chars = Vec::new();
-
-    string1_chars.iter().for_each(|c| {
-        if !string2_chars.contains(c){
-            unique_string_chars.push(*c);
-            changes +=1;
-        }
-    });
-
-    if abs_diff == 1 && unique_string_chars.len() <= 1 {
-        changes = 1;
-    }
-
-    changes <= 1
 }
 
 #[cfg(test)]
