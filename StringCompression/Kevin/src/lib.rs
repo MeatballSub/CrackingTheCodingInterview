@@ -1,7 +1,25 @@
+use std::fmt::Write;
+
 pub mod test;
 
 pub fn string_compression(string: &str) -> String {
-    todo!("Implement this function")
+    let mut compressed_str = String::new();
+    let mut consecutive = 0;
+    let byte_string = string.as_bytes();
+
+    for (i, c) in byte_string.iter().enumerate()
+    {
+        consecutive += 1;
+
+        if i + 1 >= byte_string.len() || byte_string[i] != byte_string[i + 1]
+        {
+            let _ = write!(&mut compressed_str, "{}", *c as char);
+            let _ = write!(&mut compressed_str, "{}", consecutive);
+            consecutive = 0;
+        }
+    }
+
+    if compressed_str.len() < byte_string.len() { compressed_str } else { string.to_string() }
 }
 
 #[cfg(test)]
