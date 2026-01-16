@@ -1,7 +1,36 @@
 pub mod test;
 
+fn update_compressed_string(compressed_string: &mut String, character: char, num_chars: u32) {
+    compressed_string.push_str(&character.to_string());
+    compressed_string.push_str(&num_chars.to_string());
+}
+
 pub fn string_compression(string: &str) -> String {
-    todo!("Implement this function")
+    let mut compressed_string = String::new();
+
+    let mut curr_char = string
+        .chars()
+        .nth(0)
+        .expect("unable to get first char of input string");
+    let mut num_chars: u32 = 0;
+
+    for next_char in string.chars() {
+        if !curr_char.eq(&next_char) {
+            update_compressed_string(&mut compressed_string, curr_char, num_chars);
+
+            curr_char = next_char;
+            num_chars = 0;
+        }
+
+        num_chars += 1
+    }
+    update_compressed_string(&mut compressed_string, curr_char, num_chars);
+
+    if compressed_string.len() < string.len() {
+        compressed_string
+    } else {
+        string.to_string()
+    }
 }
 
 #[cfg(test)]
