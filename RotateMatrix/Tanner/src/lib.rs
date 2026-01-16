@@ -7,7 +7,7 @@ pub mod test;
 // ↱→↴
 // ↑↻↓
 // ⬑←↲
-pub fn rotate_matrix(matrix: &[Vec<usize>]) -> &[Vec<usize>] {
+pub fn rotate_matrix(matrix: &[Vec<usize>]) -> Vec<Vec<usize>> {
     todo!("Implement this function")
 }
 
