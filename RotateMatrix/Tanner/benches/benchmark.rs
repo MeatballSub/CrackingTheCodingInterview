@@ -7,11 +7,11 @@ use rotate_matrix::rotate_matrix;
 use rotate_matrix::test::read_test_cases;
 
 fn criterion_benchmark(c: &mut Criterion) {
-    let test_cases = read_test_cases();
+    let mut test_cases = read_test_cases();
     c.bench_function("rotate_matrix", |b| {
         b.iter(|| {
-            for test_case in &test_cases {
-                rotate_matrix(black_box(&test_case.matrix));
+            for test_case in &mut test_cases {
+                rotate_matrix(black_box(&mut test_case.matrix));
             }
         })
     });
