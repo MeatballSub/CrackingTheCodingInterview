@@ -13,7 +13,13 @@ fn zero_row(matrix: &mut [Vec<usize>], i: usize) -> &[Vec<usize>] {
     for j in 0..matrix[i].len() {
         matrix[i][j] = 0
     }
+    matrix
+}
 
+fn zero_rows(matrix: &mut [Vec<usize>], rows: HashSet<usize>) -> &[Vec<usize>] {
+    for row in rows {
+        zero_row(matrix, row);
+    }
     matrix
 }
 
@@ -22,6 +28,13 @@ fn zero_col(matrix: &mut [Vec<usize>], j: usize) -> &[Vec<usize>] {
         matrix[i][j] = 0
     }
 
+    matrix
+}
+
+fn zero_cols(matrix: &mut [Vec<usize>], cols: HashSet<usize>) -> &[Vec<usize>] {
+    for col in cols {
+        zero_col(matrix, col);
+    }
     matrix
 }
 
@@ -40,13 +53,8 @@ pub fn zero_matrix(matrix: &mut [Vec<usize>]) -> &[Vec<usize>] {
         }
     }
 
-    for row in rows {
-        zero_row(matrix, row);
-    }
-
-    for col in cols {
-        zero_col(matrix, col);
-    }
+    zero_rows(matrix, rows);
+    zero_cols(matrix, cols);
 
     matrix
 }
