@@ -1,9 +1,54 @@
+use std::collections::HashSet;
+
 pub mod test;
+
+fn _print_matrix(matrix: &mut [Vec<usize>]) {
+    for i in 0..matrix.len() {
+        println!("{:?}", matrix[i]);
+    }
+    println!()
+}
+
+fn zero_row(matrix: &mut [Vec<usize>], i: usize) -> &[Vec<usize>] {
+    for j in 0..matrix[i].len() {
+        matrix[i][j] = 0
+    }
+
+    matrix
+}
+
+fn zero_col(matrix: &mut [Vec<usize>], j: usize) -> &[Vec<usize>] {
+    for i in 0..matrix.len() {
+        matrix[i][j] = 0
+    }
+
+    matrix
+}
 
 // Write an algorithm such that if an element in an N x N matrix is zero(0),
 // its entire row and column are set to zero(0)
 pub fn zero_matrix(matrix: &mut [Vec<usize>]) -> &[Vec<usize>] {
-    todo!("Implement this function")
+    let mut rows = HashSet::<usize>::new();
+    let mut cols = HashSet::<usize>::new();
+
+    for i in 0..matrix.len() {
+        for j in 0..matrix[i].len() {
+            if matrix[i][j] == 0 {
+                rows.insert(i);
+                cols.insert(j);
+            }
+        }
+    }
+
+    for row in rows {
+        zero_row(matrix, row);
+    }
+
+    for col in cols {
+        zero_col(matrix, col);
+    }
+
+    matrix
 }
 
 #[cfg(test)]
