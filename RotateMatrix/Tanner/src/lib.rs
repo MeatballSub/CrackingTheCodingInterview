@@ -1,5 +1,32 @@
 pub mod test;
 
+fn _print_matrix(matrix: &[Vec<usize>]) {
+    for row in matrix {
+        println!("{:?}", row);
+    }
+}
+
+fn rotate_spot(matrix: &mut [Vec<usize>], row: usize, col: usize) -> &[Vec<usize>] {
+    let temp = matrix[row][col];
+
+    let mut curr_row = row;
+    let mut curr_col = col;
+
+    for _i in 0..3 {
+        let new_row = (matrix.len() - 1) - curr_col;
+        let new_col = curr_row;
+
+        matrix[curr_row][curr_col] = matrix[new_row][new_col];
+
+        curr_row = new_row;
+        curr_col = new_col;
+    }
+
+    matrix[curr_row][curr_col] = temp;
+
+    matrix
+}
+
 // Given an image represented by an NxN matrix, whee each pixel in the image is
 // represented by an integer, write a method to rotate the image by 90 degrees.
 // Do it in-place.
@@ -8,7 +35,15 @@ pub mod test;
 // ↑↻↓
 // ⬑←↲
 pub fn rotate_matrix(matrix: &mut [Vec<usize>]) -> &[Vec<usize>] {
-    todo!("Implement this function")
+    for i in 0..=(matrix.len() / 2) {
+        let row = &matrix[i];
+        let last_col = row.len() - 1 - i;
+        for j in i..last_col {
+            rotate_spot(matrix, i, j);
+        }
+    }
+
+    matrix
 }
 
 #[cfg(test)]
