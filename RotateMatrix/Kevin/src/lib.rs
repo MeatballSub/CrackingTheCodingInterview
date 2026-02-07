@@ -81,6 +81,38 @@ pub fn rotate_matrix_tanner(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     matrix
 }
 
+pub fn rotate_matrix_mike(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
+{
+    let n = matrix.len();
+    if n <= 1
+    {
+        return matrix;
+    }
+
+    for layer in 0..(n / 2)
+    {
+        let first = layer;
+        let last = n - 1 - layer;
+
+        for i in first..last
+        {
+            let offset = i - first;
+
+            let mut top = matrix[first][i];
+            let mut right = matrix[i][last];
+            let mut bottom = matrix[last][last - offset];
+            let mut left = matrix[last - offset][first];
+
+            matrix[first][i] = left;
+            matrix[i][last] = top;
+            matrix[last][last - offset] = right;
+            matrix[last - offset][first] = bottom;
+        }
+    }
+
+    matrix
+}
+
 #[cfg(test)]
 pub mod unit_test
 {

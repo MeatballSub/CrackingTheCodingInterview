@@ -5,6 +5,7 @@ use criterion::Criterion;
 use criterion::criterion_group;
 use criterion::criterion_main;
 use rotate_matrix::rotate_matrix_kevin;
+use rotate_matrix::rotate_matrix_mike;
 use rotate_matrix::rotate_matrix_tanner;
 use rotate_matrix::test::read_test_cases;
 
@@ -25,6 +26,14 @@ fn criterion_benchmark(c: &mut Criterion)
                   for test_case in &mut test_cases
                   {
                       rotate_matrix_tanner(black_box(&mut test_case.matrix));
+                  }
+              })
+         });
+    group.bench_function("Mike", |b| {
+             b.iter(|| {
+                  for test_case in &mut test_cases
+                  {
+                      rotate_matrix_mike(black_box(&mut test_case.matrix));
                   }
               })
          });
