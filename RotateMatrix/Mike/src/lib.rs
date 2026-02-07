@@ -7,8 +7,38 @@ pub mod test;
 // ↱→↴
 // ↑↻↓
 // ⬑←↲
+
+// fn rotated_position(row: usize, col: usize, n: usize) -> (usize, usize) {
+//     (col, n - 1 - row)
+// }
+
 pub fn rotate_matrix(matrix: &mut [Vec<usize>]) -> &[Vec<usize>] {
-    todo!("Implement this function")
+    let n = matrix.len();
+    if n <= 1 {
+        return matrix;
+    }
+
+    for layer in 0..(n / 2) {
+        let first = layer;
+        let last = n - 1 - layer;
+
+        for i in first..last {
+
+            let offset = i - first;
+
+            let mut top = matrix[first][i];
+            let mut right = matrix[i][last];
+            let mut bottom = matrix[last][last - offset];
+            let mut left = matrix[last - offset][first];
+
+            matrix[first][i] = left;
+            matrix[i][last] = top;
+            matrix[last][last - offset] = right;
+            matrix[last - offset][first] = bottom;
+        }
+    }
+
+    matrix
 }
 
 #[cfg(test)]
