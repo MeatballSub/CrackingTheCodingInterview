@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 pub mod test;
 
 // Write an algorithm such that if an element in an N x N matrix is zero(0),
@@ -45,15 +43,6 @@ pub fn zero_matrix_kevin(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     matrix
 }
 
-fn _print_matrix(matrix: &mut [Vec<usize>])
-{
-    for i in 0..matrix.len()
-    {
-        println!("{:?}", matrix[i]);
-    }
-    println!()
-}
-
 fn zero_row(matrix: &mut [Vec<usize>], i: usize) -> &[Vec<usize>]
 {
     for j in 0..matrix[i].len()
@@ -63,11 +52,14 @@ fn zero_row(matrix: &mut [Vec<usize>], i: usize) -> &[Vec<usize>]
     matrix
 }
 
-fn zero_rows(matrix: &mut [Vec<usize>], rows: HashSet<usize>) -> &[Vec<usize>]
+fn zero_rows(matrix: &mut [Vec<usize>], rows: Vec<bool>) -> &[Vec<usize>]
 {
-    for row in rows
+    for index in 0..rows.len()
     {
-        zero_row(matrix, row);
+        if rows[index]
+        {
+            zero_row(matrix, index);
+        }
     }
     matrix
 }
@@ -82,11 +74,14 @@ fn zero_col(matrix: &mut [Vec<usize>], j: usize) -> &[Vec<usize>]
     matrix
 }
 
-fn zero_cols(matrix: &mut [Vec<usize>], cols: HashSet<usize>) -> &[Vec<usize>]
+fn zero_cols(matrix: &mut [Vec<usize>], cols: Vec<bool>) -> &[Vec<usize>]
 {
-    for col in cols
+    for index in 0..cols.len()
     {
-        zero_col(matrix, col);
+        if cols[index]
+        {
+            zero_col(matrix, index);
+        }
     }
     matrix
 }
@@ -95,8 +90,11 @@ fn zero_cols(matrix: &mut [Vec<usize>], cols: HashSet<usize>) -> &[Vec<usize>]
 // its entire row and column are set to zero(0)
 pub fn zero_matrix_tanner(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
 {
-    let mut rows = HashSet::<usize>::new();
-    let mut cols = HashSet::<usize>::new();
+    let num_rows: usize = matrix.len();
+    let num_cols = matrix[0].len();
+
+    let mut rows = vec![false; num_rows];
+    let mut cols = vec![false; num_cols];
 
     for i in 0..matrix.len()
     {
@@ -104,8 +102,8 @@ pub fn zero_matrix_tanner(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
         {
             if matrix[i][j] == 0
             {
-                rows.insert(i);
-                cols.insert(j);
+                rows[i] = true;
+                cols[j] = true;
             }
         }
     }
