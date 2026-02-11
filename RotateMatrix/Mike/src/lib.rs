@@ -25,16 +25,13 @@ pub fn rotate_matrix(matrix: &mut [Vec<usize>]) -> &[Vec<usize>] {
         for i in first..last {
 
             let offset = i - first;
-
-            let mut top = matrix[first][i];
-            let mut right = matrix[i][last];
-            let mut bottom = matrix[last][last - offset];
             let mut left = matrix[last - offset][first];
 
+            matrix[last - offset][first] = matrix[last][last - offset];;
+            matrix[last][last - offset] = matrix[i][last];;
+            matrix[i][last] = matrix[first][i];;
             matrix[first][i] = left;
-            matrix[i][last] = top;
-            matrix[last][last - offset] = right;
-            matrix[last - offset][first] = bottom;
+
         }
     }
 
