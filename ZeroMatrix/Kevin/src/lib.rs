@@ -43,6 +43,49 @@ pub fn zero_matrix_kevin(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     matrix
 }
 
+pub fn zero_matrix_kevin_2(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
+{
+    if !matrix.is_empty()
+    {
+        let n = matrix.len();
+        let mut rows = 0;
+        let mut cols = 0;
+
+        for row in 0..n
+        {
+            for col in 0..n
+            {
+                if matrix[row][col] == 0
+                {
+                    rows |= 1 << row;
+                    cols |= 1 << col;
+                }
+            }
+        }
+
+        for i in 0..n
+        {
+            if (rows & (1 << i)) != 0
+            {
+                for col in 0..n
+                {
+                    matrix[i][col] = 0;
+                }
+            }
+
+            if (cols & (1 << i)) != 0
+            {
+                for row in 0..n
+                {
+                    matrix[row][i] = 0;
+                }
+            }
+        }
+    }
+
+    matrix
+}
+
 fn zero_row(matrix: &mut [Vec<usize>], i: usize) -> &[Vec<usize>]
 {
     for j in 0..matrix[i].len()
@@ -114,6 +157,50 @@ pub fn zero_matrix_tanner(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     matrix
 }
 
+pub fn zero_matrix_mike(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
+{
+    let n = matrix.len();
+    if n <= 1
+    {
+        return matrix;
+    }
+
+    let mut rows_with_zeroes: Vec<i32> = Vec::new();
+    let mut cols_with_zeroes: Vec<i32> = Vec::new();
+
+    matrix.iter().enumerate().for_each(|(r_index, row)| {
+                                 row.iter().enumerate().for_each(|(c_index, column)| {
+                                                           if *column == 0
+                                                           {
+                                                               rows_with_zeroes.push(r_index.try_into().unwrap());
+                                                               cols_with_zeroes.push(c_index.try_into().unwrap());
+                                                           }
+                                                       });
+                             });
+
+    if cols_with_zeroes.is_empty() && rows_with_zeroes.is_empty()
+    {
+        return matrix;
+    }
+
+    for r_index in &rows_with_zeroes
+    {
+        let final_r_index = *r_index as usize;
+        matrix[final_r_index].fill(0);
+    }
+
+    for c_index in &cols_with_zeroes
+    {
+        let final_c_index = *c_index as usize;
+        for row in matrix.iter_mut()
+        {
+            row[final_c_index] = 0;
+        }
+    }
+
+    matrix
+}
+
 #[cfg(test)]
 pub mod unit_test
 {
@@ -127,7 +214,7 @@ pub mod unit_test
         for ref mut test_case in test_cases
         {
             let original = test_case.matrix.clone();
-            let actual = zero_matrix_kevin(&mut test_case.matrix);
+            let actual = zero_matrix_kevin_2(&mut test_case.matrix);
             assert_eq!(actual, test_case.answer, "input: '{:?}', expected: {:?}, actual: {:?}", original, test_case.answer, actual);
         }
     }

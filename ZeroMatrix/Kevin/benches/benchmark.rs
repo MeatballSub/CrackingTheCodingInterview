@@ -6,6 +6,8 @@ use criterion::criterion_group;
 use criterion::criterion_main;
 use rotate_matrix::test::read_test_cases;
 use rotate_matrix::zero_matrix_kevin;
+use rotate_matrix::zero_matrix_kevin_2;
+use rotate_matrix::zero_matrix_mike;
 use rotate_matrix::zero_matrix_tanner;
 
 fn criterion_benchmark(c: &mut Criterion)
@@ -20,11 +22,27 @@ fn criterion_benchmark(c: &mut Criterion)
                   }
               })
          });
+    group.bench_function("Kevin 2 - cheating", |b| {
+             b.iter(|| {
+                  for test_case in &mut test_cases
+                  {
+                      zero_matrix_kevin_2(black_box(&mut test_case.matrix));
+                  }
+              })
+         });
     group.bench_function("Tanner", |b| {
              b.iter(|| {
                   for test_case in &mut test_cases
                   {
                       zero_matrix_tanner(black_box(&mut test_case.matrix));
+                  }
+              })
+         });
+    group.bench_function("Mike", |b| {
+             b.iter(|| {
+                  for test_case in &mut test_cases
+                  {
+                      zero_matrix_mike(black_box(&mut test_case.matrix));
                   }
               })
          });
