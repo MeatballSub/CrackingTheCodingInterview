@@ -48,8 +48,51 @@ pub fn zero_matrix_kevin_2(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     if !matrix.is_empty()
     {
         let n = matrix.len();
-        let mut rows = 0;
-        let mut cols = 0;
+        let mut rows = 0u8;
+        let mut cols = 0u8;
+
+        for row in 0..n
+        {
+            for col in 0..n
+            {
+                if matrix[row][col] == 0
+                {
+                    rows |= 1 << row;
+                    cols |= 1 << col;
+                }
+            }
+        }
+
+        for i in 0..n
+        {
+            if (rows & (1 << i)) != 0
+            {
+                for col in 0..n
+                {
+                    matrix[i][col] = 0;
+                }
+            }
+
+            if (cols & (1 << i)) != 0
+            {
+                for row in 0..n
+                {
+                    matrix[row][i] = 0;
+                }
+            }
+        }
+    }
+
+    matrix
+}
+
+pub fn zero_matrix_kevin_3(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
+{
+    if !matrix.is_empty()
+    {
+        let n = matrix.len();
+        let mut rows = 0u128;
+        let mut cols = 0u128;
 
         for row in 0..n
         {
@@ -201,6 +244,47 @@ pub fn zero_matrix_mike(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
     matrix
 }
 
+pub fn zero_matrix_mike_2(matrix: &mut [Vec<usize>]) -> &[Vec<usize>]
+{
+    let n = matrix.len();
+    if n <= 1
+    {
+        return matrix;
+    }
+
+    let mut rows_with_zeroes: Vec<bool> = vec![false; n];
+    let mut cols_with_zeroes: Vec<bool> = vec![false; n];
+
+    matrix.iter().enumerate().for_each(|(r_index, row)| {
+                                 row.iter().enumerate().for_each(|(c_index, column)| {
+                                                           let is_zero = *column == 0;
+                                                           rows_with_zeroes[r_index] |= is_zero;
+                                                           cols_with_zeroes[c_index] |= is_zero
+                                                       });
+                             });
+
+    for (r_index, is_zero) in rows_with_zeroes.iter().enumerate()
+    {
+        if *is_zero
+        {
+            matrix[r_index].fill(0);
+        }
+    }
+
+    for (c_index, is_zero) in cols_with_zeroes.iter().enumerate()
+    {
+        if *is_zero
+        {
+            for row in matrix.iter_mut()
+            {
+                row[c_index] = 0;
+            }
+        }
+    }
+
+    matrix
+}
+
 #[cfg(test)]
 pub mod unit_test
 {
@@ -214,7 +298,7 @@ pub mod unit_test
         for ref mut test_case in test_cases
         {
             let original = test_case.matrix.clone();
-            let actual = zero_matrix_kevin_2(&mut test_case.matrix);
+            let actual = zero_matrix_mike_2(&mut test_case.matrix);
             assert_eq!(actual, test_case.answer, "input: '{:?}', expected: {:?}, actual: {:?}", original, test_case.answer, actual);
         }
     }
