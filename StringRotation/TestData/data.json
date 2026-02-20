@@ -108,5 +108,15 @@
         "s1": "waterbottle",
         "s2": "aterbottlw",
         "answer": false
+    },
+    {
+        "s1": "abcba",
+        "s2": "cbaa",
+        "answer": false
+    },
+    {
+        "s1": "abcba",
+        "s2": "cbaabc",
+        "answer": false
     }
 ]
