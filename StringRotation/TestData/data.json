@@ -1,0 +1,107 @@
+[
+    {
+        "s1": "waterbottle",
+        "s2": "aterbottlew",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "terbottlewa",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "erbottlewat",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "rbottlewate",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "bottlewater",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "ottlewaterb",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "ttlewaterbo",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "tlewaterbot",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "lewaterbott",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "ewaterbottl",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "waterbottle",
+        "answer": true
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "aterbottlwe",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "terbottlwea",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "erbottlweat",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "rbottlweate",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "bottlweater",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "ottlweaterb",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "ttlweaterbo",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "tlweaterbot",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "lweaterbott",
+        "answer": false
+    },
+    {
+        "s1": "waterbottle",
+        "s2": "weaterbottl",
+        "answer": false
+    }
+]
