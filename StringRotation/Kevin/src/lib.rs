@@ -1,3 +1,5 @@
+use std::fmt::Write;
+
 pub mod test;
 
 // Assume you have a method is_substring which checks if one word is a substring
@@ -7,10 +9,13 @@ pub mod test;
 pub fn string_rotation<F>(s1: &str, s2: &str, mut is_substring: F) -> bool
     where F: FnMut(&str, &str) -> bool
 {
-    // example call of is_substring, passing 2 strings
-    // it returns true if string2 is a substring of string1
-    // is_substring(string1, string2);
-    todo!();
+    if s1.len() != s2.len()
+    {
+        return false;
+    }
+
+    let double_s1 = format!("{}{}", s1, s1);
+    is_substring(&double_s1, s2)
 }
 
 pub struct LimitedSubstring(bool);
