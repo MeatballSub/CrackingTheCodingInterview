@@ -118,5 +118,10 @@
         "s1": "abcba",
         "s2": "cbaabc",
         "answer": false
+    },
+    {
+        "s1": "aaaabaaaa",
+        "s2": "aaaaaabaa",
+        "answer": true
     }
 ]
