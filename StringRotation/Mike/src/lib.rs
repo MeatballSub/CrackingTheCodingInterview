@@ -20,23 +20,29 @@ where
     if s1.len() != s2.len() {
         return false;
     }
-    let mut s1_chars: Vec<char> = s1.chars().collect();
-    let s2_chars: Vec<char> = s2.chars().collect();
-    let n = s1.len();
-    let mut i = 0;
 
-    while i < n {
-        i+= 1;
+    let s1_copy = s1.clone();
+    let s1_combined = format!("{}{}", s1, s1_copy);
+    return is_substring(&s1_combined, s2);
 
-        if s1_chars.iter().eq(s2_chars.iter()) {
-            return true;
-        }
 
-        let last = s1_chars.pop();
-        s1_chars.insert(0, last.unwrap());
-    }
+    // let mut s1_chars: Vec<char> = s1.chars().collect();
+    // let s2_chars: Vec<char> = s2.chars().collect();
+    // let n = s1.len();
+    // let mut i = 0;
 
-    return false
+    // while i < n {
+    //     i+= 1;
+
+    //     if s1_chars.iter().eq(s2_chars.iter()) {
+    //         return true;
+    //     }
+
+    //     let last = s1_chars.pop();
+    //     s1_chars.insert(0, last.unwrap());
+    // }
+
+    // return false
 }
 
 pub struct LimitedSubstring(bool);
