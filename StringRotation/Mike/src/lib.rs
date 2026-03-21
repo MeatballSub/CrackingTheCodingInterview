@@ -11,7 +11,32 @@ where
     // example call of is_substring, passing 2 strings
     // it returns true if string2 is a substring of string1
     // is_substring(string1, string2);
-    todo!();
+    // todo!();
+
+    if s1.is_empty() && s2.is_empty() {
+        return true;
+    }
+
+    if s1.len() != s2.len() {
+        return false;
+    }
+    let mut s1_chars: Vec<char> = s1.chars().collect();
+    let s2_chars: Vec<char> = s2.chars().collect();
+    let n = s1.len();
+    let mut i = 0;
+
+    while i < n {
+        i+= 1;
+
+        if s1_chars.iter().eq(s2_chars.iter()) {
+            return true;
+        }
+
+        let last = s1_chars.pop();
+        s1_chars.insert(0, last.unwrap());
+    }
+
+    return false
 }
 
 pub struct LimitedSubstring(bool);
