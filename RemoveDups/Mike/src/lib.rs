@@ -1,17 +1,39 @@
+use std::collections::HashSet;
+
 use crate::linked_list::LinkedList;
 
 mod linked_list;
 pub mod test;
 
-// Write code to remove duplicates from an unsorted linked list.
-pub fn remove_dups(list: &mut LinkedList<i32>) {
-    todo!()
+// Space magic bullshit
+fn dedup_in_place_keep_order(v: &mut Vec<i32>) {
+    let mut set = HashSet::new();
+    
+    v.retain(|x| set.insert(*x));
 }
 
+// Write code to remove duplicates from an unsorted linked list.
+pub fn remove_dups(list: &mut LinkedList<i32>) {
+    let mut buffer: Vec<i32> = vec![];
+
+    while let Some(i) = list.pop_front() {
+        buffer.push(i);
+    }
+
+    dedup_in_place_keep_order(&mut buffer);
+
+    *list = LinkedList::new();
+
+    buffer.iter().for_each(|entry| {
+        list.push_back(*entry);
+    });
+}
+
+
 // FOLLOW UP
-// How would you solve this problem if a tomporary buffer is not allowed
+// How would you solve this problem if a temporary buffer is not allowed
 pub fn remove_dups_follow_up(list: &mut LinkedList<i32>) {
-    todo!()
+
 }
 
 #[cfg(test)]
