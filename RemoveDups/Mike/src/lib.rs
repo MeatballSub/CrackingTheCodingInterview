@@ -33,7 +33,29 @@ pub fn remove_dups(list: &mut LinkedList<i32>) {
 // FOLLOW UP
 // How would you solve this problem if a temporary buffer is not allowed
 pub fn remove_dups_follow_up(list: &mut LinkedList<i32>) {
+ // two cursors
+ // one as a look ahead, one to iterate through
 
+    let mut cursor = list.unsafe_cursor_front();
+    let mut peek = list.unsafe_cursor_front_mut();
+
+    while let Some(curr_node) = cursor.current()
+    {
+        peek.reset(&cursor);
+        peek.move_next();
+        while let Some(peek_val) = peek.current()
+        {
+            if *peek_val == curr_node
+            {
+                peek.remove_current();
+            }
+            else
+            {
+                peek.move_next();
+            }
+        }
+        cursor.move_next();
+    }
 }
 
 #[cfg(test)]
