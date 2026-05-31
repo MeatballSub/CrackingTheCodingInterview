@@ -6,14 +6,43 @@ pub mod test;
 // Implement an algorithm to find the k-th to last element of a singly linked
 // list
 pub fn kth_to_last(k: usize, list: &LinkedList<i32>) -> Option<&i32> {
-    todo!()
+    let num_elements = list.len();
+
+    if k > num_elements {
+        return None;
+    }
+
+    let mut index = 0;
+    let position = num_elements - k - 1;
+
+    for element in list.iter() {
+        if index == position {
+            return Some(element);
+        }
+        index += 1;
+    }
+
+    None
 }
 
 // FOLLOW UP
 // Implement an algorithm to find the k-th to last element of a singly linked
 // list, without using the len of the list
 pub fn kth_to_last_no_size(k: usize, list: &LinkedList<i32>) -> Option<&i32> {
-    todo!()
+    let mut solution = None;
+
+    let mut front = list.iter();
+    let mut back = list.iter();
+
+    for _i in 0..k {
+        front.next();
+    }
+
+    while front.next().is_some() {
+        solution = back.next();
+    }
+
+    return solution;
 }
 
 #[cfg(test)]
