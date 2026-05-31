@@ -1,0 +1,102 @@
+[
+    {
+        "partition_value": 5,
+        "list": [
+            3,
+            5,
+            8,
+            5,
+            10,
+            2,
+            1
+        ]
+    },
+    {
+        "partition_value": 0,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 1,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 2,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 3,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 4,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 5,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 6,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    },
+    {
+        "partition_value": 7,
+        "list": [
+            5,
+            3,
+            1,
+            6,
+            2,
+            4
+        ]
+    }
+]
