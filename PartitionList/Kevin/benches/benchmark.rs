@@ -10,11 +10,27 @@ fn criterion_benchmark(c: &mut Criterion)
 {
     let mut test_cases = read_test_cases();
     let mut group = c.benchmark_group("partition list");
-    group.bench_function("Kevin", |b| {
+    group.bench_function("Kevin - stable_safe", |b| {
              b.iter(|| {
                   for ref mut test_case in &mut test_cases
                   {
-                      test_case.list.partition(black_box(test_case.partition_value));
+                      test_case.list.partition_stable_safe(black_box(test_case.partition_value));
+                  }
+              })
+         });
+    group.bench_function("Kevin - stable_unsafe", |b| {
+             b.iter(|| {
+                  for ref mut test_case in &mut test_cases
+                  {
+                      test_case.list.partition_stable_unsafe(black_box(test_case.partition_value));
+                  }
+              })
+         });
+    group.bench_function("Kevin - unstable_unsafe", |b| {
+             b.iter(|| {
+                  for ref mut test_case in &mut test_cases
+                  {
+                      test_case.list.partition_unstable_unsafe(black_box(test_case.partition_value));
                   }
               })
          });
