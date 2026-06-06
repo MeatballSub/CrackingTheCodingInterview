@@ -1,3 +1,6 @@
+#[path = "partition.rs"]
+mod partition;
+
 pub struct Node<T> {
     pub next: Option<std::ptr::NonNull<Node<T>>>,
     pub element: T,
