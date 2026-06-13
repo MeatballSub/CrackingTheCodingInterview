@@ -12,9 +12,18 @@ use crate::linked_list::LinkedList;
 
 // NOTE: We're implementing a new method on the LinkedList itself
 //       We have access to private data through self
-impl<T: Clone + PartialOrd> LinkedList<T> {
+
+
+impl<T: Clone + PartialOrd + std::fmt::Debug + std::cmp::Ord> LinkedList<T> {
     pub fn partition(&mut self, partition_value: T) {
-        // todo!()
+        let mut values = self.iter().cloned().collect::<Vec<_>>();
+        values.sort_by_key(|a| (a >= &partition_value, a.clone()));
+
+        while self.pop_front().is_some() {}        
+        
+        for item in values {
+            self.push_back(item);
+        }
     }
 }
 
