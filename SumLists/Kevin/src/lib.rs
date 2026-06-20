@@ -2,6 +2,7 @@
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
 pub mod linked_list;
+#[cfg(test)]
 pub mod test;
 
 mod forward;

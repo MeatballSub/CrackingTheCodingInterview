@@ -1,5 +1,4 @@
 use std::hint::black_box;
-use std::time::Duration;
 
 use criterion::BatchSize;
 use criterion::Criterion;
