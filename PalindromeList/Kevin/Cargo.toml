@@ -1,0 +1,16 @@
+[package]
+name = "palindrome_list"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mimalloc = "0.1.52"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dev-dependencies]
+criterion = { version = "0.7", features = ["html_reports"] }
+
+[[bench]]
+name = "benchmark"
+harness = false

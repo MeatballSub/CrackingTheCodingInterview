@@ -1,0 +1,103 @@
+[
+    {
+        "description": "empty list is a palindrome",
+        "list": [],
+        "expected": true
+    },
+    {
+        "description": "single element is a palindrome",
+        "list": [
+            1
+        ],
+        "expected": true
+    },
+    {
+        "description": "two equal elements is a palindrome",
+        "list": [
+            7,
+            7
+        ],
+        "expected": true
+    },
+    {
+        "description": "two different elements is not a palindrome",
+        "list": [
+            1,
+            2
+        ],
+        "expected": false
+    },
+    {
+        "description": "odd-length palindrome",
+        "list": [
+            1,
+            2,
+            3,
+            2,
+            1
+        ],
+        "expected": true
+    },
+    {
+        "description": "even-length palindrome",
+        "list": [
+            1,
+            2,
+            2,
+            1
+        ],
+        "expected": true
+    },
+    {
+        "description": "odd-length non-palindrome",
+        "list": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "expected": false
+    },
+    {
+        "description": "even-length non-palindrome",
+        "list": [
+            1,
+            2,
+            3,
+            1
+        ],
+        "expected": false
+    },
+    {
+        "description": "differs only at the center pair",
+        "list": [
+            1,
+            2,
+            4,
+            3,
+            2,
+            1
+        ],
+        "expected": false
+    },
+    {
+        "description": "all equal elements is a palindrome",
+        "list": [
+            9,
+            9,
+            9,
+            9
+        ],
+        "expected": true
+    },
+    {
+        "description": "palindrome with negative values",
+        "list": [
+            -1,
+            0,
+            -1
+        ],
+        "expected": true
+    }
+]

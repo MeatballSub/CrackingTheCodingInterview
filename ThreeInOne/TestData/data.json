@@ -1,0 +1,130 @@
+[
+    {
+        "description": "push, peek, and pop on a single stack",
+        "stack_capacity": 2,
+        "operations": [
+            { "IsEmpty": { "stack": 0, "expected": true } },
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "IsEmpty": { "stack": 0, "expected": false } },
+            { "Peek": { "stack": 0, "expected": 2 } },
+            { "Pop": { "stack": 0, "expected": 2 } },
+            { "Pop": { "stack": 0, "expected": 1 } },
+            { "Pop": { "stack": 0, "expected": null } },
+            { "IsEmpty": { "stack": 0, "expected": true } }
+        ]
+    },
+    {
+        "description": "pushing past capacity fails and leaves the top unchanged",
+        "stack_capacity": 2,
+        "operations": [
+            { "Push": { "stack": 1, "value": 5, "ok": true } },
+            { "Push": { "stack": 1, "value": 6, "ok": true } },
+            { "Push": { "stack": 1, "value": 7, "ok": false } },
+            { "Peek": { "stack": 1, "expected": 6 } }
+        ]
+    },
+    {
+        "description": "the three stacks are independent",
+        "stack_capacity": 1,
+        "operations": [
+            { "Push": { "stack": 0, "value": 10, "ok": true } },
+            { "Push": { "stack": 1, "value": 20, "ok": true } },
+            { "Push": { "stack": 2, "value": 30, "ok": true } },
+            { "Peek": { "stack": 0, "expected": 10 } },
+            { "Peek": { "stack": 1, "expected": 20 } },
+            { "Peek": { "stack": 2, "expected": 30 } },
+            { "Pop": { "stack": 1, "expected": 20 } },
+            { "IsEmpty": { "stack": 1, "expected": true } },
+            { "Peek": { "stack": 0, "expected": 10 } },
+            { "Peek": { "stack": 2, "expected": 30 } }
+        ]
+    },
+    {
+        "description": "pop and peek on empty stacks return None",
+        "stack_capacity": 3,
+        "operations": [
+            { "Pop": { "stack": 0, "expected": null } },
+            { "Peek": { "stack": 2, "expected": null } },
+            { "IsEmpty": { "stack": 0, "expected": true } }
+        ]
+    },
+    {
+        "description": "interleaved pushes across stacks preserve per-stack LIFO order",
+        "stack_capacity": 3,
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 1, "value": 2, "ok": true } },
+            { "Push": { "stack": 0, "value": 3, "ok": true } },
+            { "Push": { "stack": 2, "value": 4, "ok": true } },
+            { "Push": { "stack": 1, "value": 5, "ok": true } },
+            { "Pop": { "stack": 0, "expected": 3 } },
+            { "Pop": { "stack": 0, "expected": 1 } },
+            { "Pop": { "stack": 0, "expected": null } },
+            { "Pop": { "stack": 1, "expected": 5 } },
+            { "Pop": { "stack": 1, "expected": 2 } },
+            { "Pop": { "stack": 2, "expected": 4 } }
+        ]
+    },
+    {
+        "description": "is_empty tracks transitions",
+        "stack_capacity": 2,
+        "operations": [
+            { "IsEmpty": { "stack": 0, "expected": true } },
+            { "Push": { "stack": 0, "value": 7, "ok": true } },
+            { "IsEmpty": { "stack": 0, "expected": false } },
+            { "Pop": { "stack": 0, "expected": 7 } },
+            { "IsEmpty": { "stack": 0, "expected": true } }
+        ]
+    },
+    {
+        "description": "all three stacks can be filled to capacity, then reject further pushes",
+        "stack_capacity": 2,
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "Push": { "stack": 1, "value": 3, "ok": true } },
+            { "Push": { "stack": 1, "value": 4, "ok": true } },
+            { "Push": { "stack": 2, "value": 5, "ok": true } },
+            { "Push": { "stack": 2, "value": 6, "ok": true } },
+            { "Push": { "stack": 0, "value": 9, "ok": false } },
+            { "Push": { "stack": 1, "value": 9, "ok": false } },
+            { "Push": { "stack": 2, "value": 9, "ok": false } }
+        ]
+    },
+    {
+        "description": "handles zero and negative values",
+        "stack_capacity": 3,
+        "operations": [
+            { "Push": { "stack": 0, "value": 0, "ok": true } },
+            { "Push": { "stack": 0, "value": -5, "ok": true } },
+            { "Peek": { "stack": 0, "expected": -5 } },
+            { "Pop": { "stack": 0, "expected": -5 } },
+            { "Pop": { "stack": 0, "expected": 0 } }
+        ]
+    },
+    {
+        "description": "capacity of one allows refill after a pop",
+        "stack_capacity": 1,
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": false } },
+            { "Pop": { "stack": 0, "expected": 1 } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "Peek": { "stack": 0, "expected": 2 } }
+        ]
+    },
+    {
+        "description": "refilling a stack after emptying it",
+        "stack_capacity": 2,
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "Pop": { "stack": 0, "expected": 2 } },
+            { "Pop": { "stack": 0, "expected": 1 } },
+            { "Push": { "stack": 0, "value": 3, "ok": true } },
+            { "Peek": { "stack": 0, "expected": 3 } },
+            { "IsEmpty": { "stack": 0, "expected": false } }
+        ]
+    }
+]
