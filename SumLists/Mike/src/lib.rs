@@ -4,6 +4,7 @@ pub mod test;
 
 mod forward;
 mod reverse;
+mod sum_utils;
 
 use crate::linked_list::LinkedList;
 
