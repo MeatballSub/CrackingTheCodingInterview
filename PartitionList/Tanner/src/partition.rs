@@ -14,7 +14,18 @@ use crate::linked_list::LinkedList;
 //       We have access to private data through self
 impl<T: Clone + PartialOrd> LinkedList<T> {
     pub fn partition(&mut self, partition_value: T) {
-        // todo!()
+        let mut cursor = self.unsafe_cursor_front_mut();
+
+        for _i in 0..self.len() {
+            let current = cursor.current().unwrap();
+
+            if *current >= partition_value {
+                let current_value = cursor.remove_current().unwrap();
+                self.push_back(current_value);
+            } else {
+                cursor.move_next();
+            }
+        }
     }
 }
 
