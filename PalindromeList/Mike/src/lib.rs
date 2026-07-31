@@ -5,7 +5,8 @@ pub mod test;
 
 // Implement a function to check if a linked list is a palindrome.
 pub fn is_palindrome(list: &LinkedList<i32>) -> bool {
-    todo!()
+    let mut list_vec = list.into_iter().collect::<Vec<&i32>>();
+    list_vec.iter().eq(list_vec.iter().rev())
 }
 
 #[cfg(test)]
