@@ -4,8 +4,11 @@ use std::time::Duration;
 use criterion::Criterion;
 use criterion::criterion_group;
 use criterion::criterion_main;
-use three_in_one::FixedMultiStack;
 use three_in_one::ThreeStacks;
+use three_in_one::fixed_multi_stack::FixedMultiStack;
+use three_in_one::flexible_multi_stack::FlexibleMultiStack;
+use three_in_one::test::CapacityModel;
+use three_in_one::test::TestCase;
 use three_in_one::test::read_test_cases;
 use three_in_one::test::run_operations;
 
@@ -30,15 +33,15 @@ macro_rules! bench_three_in_one_impls {
 
 fn criterion_benchmark(c: &mut Criterion)
 {
-    let test_cases = read_test_cases();
+    let test_cases: Vec<TestCase> = read_test_cases().into_iter().filter(|case| case.capacity_model == CapacityModel::Any).collect();
     let mut group = c.benchmark_group("three in one");
-    bench_three_in_one_impls!(group, &test_cases, "fixed_multi_stack" => FixedMultiStack::new);
+    bench_three_in_one_impls!(group, &test_cases, "fixed_multi_stack" => FixedMultiStack::new, "flexible_multi_stack" => FlexibleMultiStack::new);
     group.finish();
 }
 
 criterion_group! {
     name = benches;
-    config = Criterion::default().sample_size(5000).measurement_time(Duration::from_secs(10)).warm_up_time(Duration::from_secs(6));
+    config = Criterion::default().sample_size(5000).measurement_time(Duration::from_secs(20)).warm_up_time(Duration::from_secs(6));
     targets = criterion_benchmark
 }
 criterion_main!(benches);

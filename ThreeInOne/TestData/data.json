@@ -17,6 +17,7 @@
     {
         "description": "pushing past capacity fails and leaves the top unchanged",
         "stack_capacity": 2,
+        "capacity_model": "per_stack",
         "operations": [
             { "Push": { "stack": 1, "value": 5, "ok": true } },
             { "Push": { "stack": 1, "value": 6, "ok": true } },
@@ -106,6 +107,7 @@
     {
         "description": "capacity of one allows refill after a pop",
         "stack_capacity": 1,
+        "capacity_model": "per_stack",
         "operations": [
             { "Push": { "stack": 0, "value": 1, "ok": true } },
             { "Push": { "stack": 0, "value": 2, "ok": false } },

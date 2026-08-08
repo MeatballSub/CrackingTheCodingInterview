@@ -1,0 +1,73 @@
+[
+    {
+        "description": "one stack may exceed its share while the shared pool has room",
+        "stack_capacity": 2,
+        "capacity_model": "total",
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "Push": { "stack": 0, "value": 3, "ok": true } },
+            { "Push": { "stack": 0, "value": 4, "ok": true } },
+            { "Peek": { "stack": 0, "expected": 4 } },
+            { "Push": { "stack": 1, "value": 5, "ok": true } },
+            { "Push": { "stack": 1, "value": 6, "ok": true } },
+            { "Push": { "stack": 2, "value": 7, "ok": false } },
+            { "Push": { "stack": 0, "value": 8, "ok": false } },
+            { "IsEmpty": { "stack": 2, "expected": true } },
+            { "Pop": { "stack": 0, "expected": 4 } },
+            { "Push": { "stack": 2, "value": 9, "ok": true } },
+            { "Peek": { "stack": 2, "expected": 9 } },
+            { "Peek": { "stack": 0, "expected": 3 } }
+        ]
+    },
+    {
+        "description": "a slot freed by one stack becomes available to another",
+        "stack_capacity": 1,
+        "capacity_model": "total",
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 0, "value": 2, "ok": true } },
+            { "Push": { "stack": 0, "value": 3, "ok": true } },
+            { "Push": { "stack": 1, "value": 4, "ok": false } },
+            { "IsEmpty": { "stack": 1, "expected": true } },
+            { "Pop": { "stack": 0, "expected": 3 } },
+            { "Push": { "stack": 1, "value": 4, "ok": true } },
+            { "Peek": { "stack": 1, "expected": 4 } },
+            { "Peek": { "stack": 0, "expected": 2 } },
+            { "Push": { "stack": 2, "value": 5, "ok": false } }
+        ]
+    },
+    {
+        "description": "interleaved refills reuse freed slots without disturbing other stacks",
+        "stack_capacity": 2,
+        "capacity_model": "total",
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": true } },
+            { "Push": { "stack": 1, "value": 2, "ok": true } },
+            { "Push": { "stack": 2, "value": 3, "ok": true } },
+            { "Pop": { "stack": 1, "expected": 2 } },
+            { "Push": { "stack": 0, "value": 4, "ok": true } },
+            { "Push": { "stack": 0, "value": 5, "ok": true } },
+            { "Push": { "stack": 0, "value": 6, "ok": true } },
+            { "Push": { "stack": 0, "value": 7, "ok": true } },
+            { "Push": { "stack": 0, "value": 8, "ok": false } },
+            { "Peek": { "stack": 0, "expected": 7 } },
+            { "Peek": { "stack": 2, "expected": 3 } },
+            { "IsEmpty": { "stack": 1, "expected": true } },
+            { "Pop": { "stack": 2, "expected": 3 } },
+            { "Push": { "stack": 1, "value": 9, "ok": true } },
+            { "Peek": { "stack": 1, "expected": 9 } },
+            { "Peek": { "stack": 0, "expected": 7 } }
+        ]
+    },
+    {
+        "description": "a capacity of zero rejects every push",
+        "stack_capacity": 0,
+        "operations": [
+            { "Push": { "stack": 0, "value": 1, "ok": false } },
+            { "IsEmpty": { "stack": 0, "expected": true } },
+            { "Pop": { "stack": 0, "expected": null } },
+            { "Peek": { "stack": 2, "expected": null } }
+        ]
+    }
+]
