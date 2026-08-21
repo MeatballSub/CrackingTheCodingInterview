@@ -10,23 +10,39 @@ pub struct MinStack {
 
 impl MinStack {
     pub fn new() -> Self {
-        todo!()
+        MinStack{values: vec![], minimums: vec![]}
     }
 
     pub fn push(&mut self, value: i32) {
-        todo!()
+        self.values.push(value);
+        if let Some(min) = self.min() {
+            if value < min {
+                self.minimums.push(value);
+            } else {
+                self.minimums.push(min);
+            }
+
+        } else {
+            self.minimums.push(value);
+        }
+
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        todo!()
+        if self.is_empty() {
+            return None;
+        }
+        self.minimums.pop();
+        self.values.pop()
+
     }
 
-    pub fn min(&self) -> Option<i32> {
-        todo!()
+    pub fn min(&self) -> Option<i32> { 
+        self.minimums.iter().min().copied()
     }
 
     pub fn is_empty(&self) -> bool {
-        todo!()
+        self.values.is_empty()
     }
 }
 
