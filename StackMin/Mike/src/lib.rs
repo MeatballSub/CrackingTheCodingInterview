@@ -37,8 +37,8 @@ impl MinStack {
 
     }
 
-    pub fn min(&self) -> Option<i32> { 
-        self.minimums.iter().min().copied()
+    pub fn min(&self) -> Option<i32> {
+        self.minimums.last().copied()
     }
 
     pub fn is_empty(&self) -> bool {
