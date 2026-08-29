@@ -1,0 +1,1232 @@
+[
+    {
+        "description": "dequeue and peek on an empty queue return nothing",
+        "operations": [
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": null
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            }
+        ]
+    },
+    {
+        "description": "single element: enqueue, peek, dequeue, empty again",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 42
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 42
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 42
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "three elements come out first in, first out",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 3
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "enqueue during a partial drain keeps the arrival order",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 4
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 5
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 4
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 5
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "drain, dequeue past empty, then reuse the queue",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 7
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 8
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 7
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 8
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": null
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 9
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 10
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 9
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 9
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 10
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "peek does not consume the front element",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 11
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 12
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 13
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 11
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 11
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 11
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 11
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 12
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 12
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 12
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 13
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "negative values and duplicates survive the round trip",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": -5
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": -5
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 7
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": -5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 5
+                }
+            },
+            {
+                "Peek": {
+                    "expected": -5
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": -5
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 0
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 0
+                }
+            },
+            {
+                "Peek": {
+                    "expected": -5
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": -5
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 7
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 7
+                }
+            },
+            {
+                "Peek": {
+                    "expected": -5
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": -5
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "is_empty is false and len is exact at depth",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 100
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 200
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 300
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 400
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 100
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 200
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 300
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 400
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            }
+        ]
+    },
+    {
+        "description": "add, add, remove, add, remove",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 3
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            }
+        ]
+    },
+    {
+        "description": "twenty in, twenty out, order preserved",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 4
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 5
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 6
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 7
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 8
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 9
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 10
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 11
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 12
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 13
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 14
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 15
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 16
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 17
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 18
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 19
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 20
+                }
+            },
+            {
+                "Len": {
+                    "expected": 20
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 4
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 5
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 6
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 7
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 8
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 9
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 10
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 11
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 12
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 13
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 14
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 15
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 16
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 17
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 18
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 19
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 20
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "strict alternation never lets the queue hold more than one",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 2
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 3
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 4
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 4
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 4
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 5
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 5
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 6
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 6
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 6
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 7
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 7
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 7
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 8
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 8
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 8
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 9
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 9
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 10
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 10
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 10
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            }
+        ]
+    },
+    {
+        "description": "len and is_empty while both stacks are loaded",
+        "operations": [
+            {
+                "Enqueue": {
+                    "value": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 2
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 3
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 1
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 4
+                }
+            },
+            {
+                "Enqueue": {
+                    "value": 5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 2
+                }
+            },
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 2
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 3
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 4
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Dequeue": {
+                    "expected": 5
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            }
+        ]
+    }
+]
