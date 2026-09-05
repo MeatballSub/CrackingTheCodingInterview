@@ -63,7 +63,7 @@ impl SetOfStacks {
     }
 
     pub fn peek(&self) -> Option<i32> {
-        if self.top_stack_count() == 0 || self.is_empty() {
+        if self.is_empty() {
             None
         } else {
             self.stacks.last().and_then(|stack| stack.last().copied())
