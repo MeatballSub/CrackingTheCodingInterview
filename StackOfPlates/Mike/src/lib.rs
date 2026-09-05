@@ -20,31 +20,77 @@ pub struct SetOfStacks {
 
 impl SetOfStacks {
     pub fn new(capacity: usize) -> Self {
-        todo!()
+        Self {
+            capacity,
+            stacks: Vec::new(),
+        }
     }
 
     pub fn push(&mut self, value: i32) {
-        todo!()
+        if self.is_empty() || self.top_stack_count() == self.capacity {
+            self.stacks.push(vec![value]);
+        } else if self.top_stack_count() < self.capacity {
+            if let Some(inner_vec) = self.stacks.last_mut() {
+                inner_vec.push(value);
+            }
+        }
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        todo!()
+        if self.is_empty() {
+            None
+        } else {
+            let result = self.stacks.last_mut().unwrap().pop();
+            if self.top_stack_count() == 0 {
+                self.stacks.pop();
+            }
+
+            result
+        }
     }
 
     pub fn pop_at(&mut self, index: usize) -> Option<i32> {
-        todo!()
+        if self.is_empty() {
+            None
+        } else {
+            let safe_indexed_target = self.stacks.get_mut(index)?;
+            let result = safe_indexed_target.pop();
+    
+            self.recombobulate();
+            
+            result
+        }
     }
 
     pub fn peek(&self) -> Option<i32> {
-        todo!()
+        if self.top_stack_count() == 0 || self.is_empty() {
+            None
+        } else {
+            self.stacks.last().and_then(|stack| stack.last().copied())
+        }
     }
 
     pub fn is_empty(&self) -> bool {
-        todo!()
+        println!("{:?}", self.stacks.iter().all(|v| v.is_empty()));
+        self.stacks.iter().all(|v| v.is_empty())
+    }
+
+    pub fn top_stack_count(&self) -> usize {
+        self.stacks.last().map(|v| v.len()).unwrap_or(0)
     }
 
     pub fn stack_count(&self) -> usize {
-        todo!()
+        println!("{:?}", self.stacks.len());
+        self.stacks.len()
+    }
+
+    pub fn recombobulate(&mut self) -> () {
+        let mut flattened_stacks: Vec<_> = self.stacks.clone().into_iter().flatten().collect();
+        let recombobulated = flattened_stacks
+            .chunks(self.capacity)
+            .map(|chunk| chunk.to_vec())
+            .collect::<Vec<_>>();
+        self.stacks = recombobulated;
     }
 }
 
