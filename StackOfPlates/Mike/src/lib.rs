@@ -71,7 +71,6 @@ impl SetOfStacks {
     }
 
     pub fn is_empty(&self) -> bool {
-        println!("{:?}", self.stacks.iter().all(|v| v.is_empty()));
         self.stacks.iter().all(|v| v.is_empty())
     }
 
@@ -80,12 +79,11 @@ impl SetOfStacks {
     }
 
     pub fn stack_count(&self) -> usize {
-        println!("{:?}", self.stacks.len());
         self.stacks.len()
     }
 
     pub fn recombobulate(&mut self) -> () {
-        let mut flattened_stacks: Vec<_> = self.stacks.clone().into_iter().flatten().collect();
+        let flattened_stacks: Vec<_> = self.stacks.clone().into_iter().flatten().collect();
         let recombobulated = flattened_stacks
             .chunks(self.capacity)
             .map(|chunk| chunk.to_vec())
