@@ -1,0 +1,4 @@
+# bench_all is a POSIX shell script. CRLF line endings would break its shebang
+# on Linux and macOS -- the interpreter becomes "/usr/bin/env sh\r", which fails
+# with "bad interpreter". Keep it LF regardless of the checkout platform.
+bench_all text eol=lf

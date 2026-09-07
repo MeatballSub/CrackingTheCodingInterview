@@ -1,0 +1,971 @@
+[
+    {
+        "description": "empty stack: peek, pop, and sort all leave it empty",
+        "operations": [
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            },
+            "Sort",
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Peek": {
+                    "expected": null
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "a single element survives a sort",
+        "operations": [
+            {
+                "Push": {
+                    "value": 42
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 42
+                }
+            },
+            {
+                "Len": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 42
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "canonical: push 5, 3, 9, 1 then sort pops ascending",
+        "operations": [
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            "Sort",
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "already smallest on top: sort leaves the order unchanged",
+        "operations": [
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "largest on top: sort fully reverses the stack",
+        "operations": [
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 9
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "duplicates all come out together",
+        "operations": [
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Len": {
+                    "expected": 5
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "negatives and zero sort ahead of positives",
+        "operations": [
+            {
+                "Push": {
+                    "value": -3
+                }
+            },
+            {
+                "Push": {
+                    "value": 0
+                }
+            },
+            {
+                "Push": {
+                    "value": -7
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": -7
+                }
+            },
+            {
+                "Pop": {
+                    "expected": -7
+                }
+            },
+            {
+                "Pop": {
+                    "expected": -3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 0
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "a push after sorting is re-placed by the next sort",
+        "operations": [
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 4
+                }
+            },
+            {
+                "Len": {
+                    "expected": 4
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "sort, pop two, sort the remainder, then drain",
+        "operations": [
+            {
+                "Push": {
+                    "value": 8
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 6
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Push": {
+                    "value": 10
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 6
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 6
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 8
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 10
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "peek does not consume, and is_empty is false with len exact at depth",
+        "operations": [
+            {
+                "Push": {
+                    "value": 7
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 5
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 7
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "sorting twice in a row changes nothing",
+        "operations": [
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 6
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            "Sort",
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 8
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 6
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            }
+        ]
+    },
+    {
+        "description": "drain past empty, then reuse the stack and sort again",
+        "operations": [
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            },
+            {
+                "Push": {
+                    "value": 9
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 5
+                }
+            },
+            {
+                "Len": {
+                    "expected": 3
+                }
+            },
+            "Sort",
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 9
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Pop": {
+                    "expected": null
+                }
+            }
+        ]
+    },
+    {
+        "description": "len and is_empty stay exact after a sort has moved values between stacks",
+        "operations": [
+            {
+                "Push": {
+                    "value": 6
+                }
+            },
+            {
+                "Push": {
+                    "value": 2
+                }
+            },
+            {
+                "Push": {
+                    "value": 8
+                }
+            },
+            {
+                "Push": {
+                    "value": 4
+                }
+            },
+            "Sort",
+            {
+                "Push": {
+                    "value": 7
+                }
+            },
+            {
+                "Push": {
+                    "value": 1
+                }
+            },
+            {
+                "Len": {
+                    "expected": 6
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Push": {
+                    "value": 3
+                }
+            },
+            {
+                "Len": {
+                    "expected": 7
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            "Sort",
+            {
+                "Len": {
+                    "expected": 7
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": false
+                }
+            },
+            {
+                "Peek": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 1
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 2
+                }
+            },
+            {
+                "Len": {
+                    "expected": 5
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 3
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 4
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 6
+                }
+            },
+            {
+                "Len": {
+                    "expected": 2
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 7
+                }
+            },
+            {
+                "Pop": {
+                    "expected": 8
+                }
+            },
+            {
+                "IsEmpty": {
+                    "expected": true
+                }
+            },
+            {
+                "Len": {
+                    "expected": 0
+                }
+            }
+        ]
+    }
+]
