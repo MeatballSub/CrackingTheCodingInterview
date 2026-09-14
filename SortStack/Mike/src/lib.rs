@@ -10,32 +10,45 @@ pub struct SortableStack {
 
 impl SortableStack {
     pub fn new() -> Self {
-        todo!()
+        SortableStack{values: vec![]}
     }
 
     pub fn push(&mut self, value: i32) {
-        todo!()
+        self.values.push(value);
     }
 
     pub fn pop(&mut self) -> Option<i32> {
-        todo!()
+        self.values.pop()
+
     }
 
-    pub fn peek(&mut self) -> Option<i32> {
-        todo!()
+    pub fn peek(&self) -> Option<i32> {
+        self.values.last().copied()
     }
 
     pub fn is_empty(&self) -> bool {
-        todo!()
+        self.values.is_empty()
     }
 
     pub fn len(&self) -> usize {
-        todo!()
+        self.values.len()
     }
 
     // Reorders the stack so the smallest item is on top.
     pub fn sort(&mut self) {
-        todo!()
+        let mut temp = vec![];
+
+        while let Some(real_current) = self.pop() {
+            while let Some(&temp_top) = temp.last() {
+                if temp_top < real_current {
+                    self.push(temp.pop().unwrap());
+                } else {
+                    break;
+                }
+            }
+            temp.push(real_current);
+        }
+        self.values = temp;
     }
 }
 
