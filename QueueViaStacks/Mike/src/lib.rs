@@ -9,27 +9,44 @@ pub struct MyQueue {
 
 impl MyQueue {
     pub fn new() -> Self {
-        todo!()
+         MyQueue{newest: Vec::new(), oldest: Vec::new()}
     }
 
     pub fn enqueue(&mut self, value: i32) {
-        todo!()
+        self.newest.push(value);
+
     }
 
     pub fn dequeue(&mut self) -> Option<i32> {
-        todo!()
+        if !self.oldest.is_empty() {
+            self.oldest.pop()
+        } else {
+            self.shift();
+            self.oldest.pop()
+        }
     }
 
     pub fn peek(&mut self) -> Option<i32> {
-        todo!()
+        if !self.oldest.is_empty() {
+            self.oldest.last().copied()
+        } else {
+            self.shift();
+            self.oldest.last().copied()
+        }
+    }
+
+    fn shift (&mut self) {
+        while let Some (newest_pop) = self.newest.pop() {
+            self.oldest.push(newest_pop);
+        }
     }
 
     pub fn is_empty(&self) -> bool {
-        todo!()
+        self.newest.is_empty() && self.oldest.is_empty()
     }
 
     pub fn len(&self) -> usize {
-        todo!()
+        self.newest.len() + self.oldest.len()
     }
 }
 
