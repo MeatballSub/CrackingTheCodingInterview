@@ -1,0 +1,1125 @@
+[
+  {
+    "description": "fresh shelter is empty and every dequeue yields nothing",
+    "operations": [
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "Len": {
+          "expected": 0
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "Len": {
+          "expected": 0
+        }
+      }
+    ]
+  },
+  {
+    "description": "single dog: dequeue_cat yields nothing and leaves the dog",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 15
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "Len": {
+          "expected": 1
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "Len": {
+          "expected": 1
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 15
+          }
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "Len": {
+          "expected": 0
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "single cat adopted via dequeue_any",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 9
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "Len": {
+          "expected": 1
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "Len": {
+          "expected": 1
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 9
+          }
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "dequeue_any returns animals in arrival order across species",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 20
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 45
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 21
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 26
+        }
+      },
+      {
+        "Len": {
+          "expected": 4
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 20
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 45
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 21
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 26
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      }
+    ]
+  },
+  {
+    "description": "dequeue_dog skips older cats, which remain in arrival order",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 11
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 15
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 12
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 17
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 5
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 11
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 12
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 5
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "Len": {
+          "expected": 2
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 15
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 17
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "dequeue_cat skips older dogs, then dequeue_any takes the remainder",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 5
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 27
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 42
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 35
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 55
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 42
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 5
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 27
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 55
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 35
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "dequeue_any finds the true oldest after preference dequeues unbalance the queues",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 19
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 32
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 49
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 12
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 62
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 31
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 32
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 12
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 19
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 49
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 62
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 31
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "only dogs: dequeue_cat repeatedly yields nothing without consuming",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 3
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 14
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 11
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "Len": {
+          "expected": 3
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 3
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 14
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 11
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      }
+    ]
+  },
+  {
+    "description": "drain, dequeue past empty, refill, drain again",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 13
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 38
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 13
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 38
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": null
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 24
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 34
+        }
+      },
+      {
+        "Len": {
+          "expected": 2
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 24
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 34
+          }
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "len and is_empty with both species held (sum, not max)",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 9
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 27
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 31
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 10
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 50
+        }
+      },
+      {
+        "Len": {
+          "expected": 5
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 9
+          }
+        }
+      },
+      {
+        "Len": {
+          "expected": 4
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 27
+          }
+        }
+      },
+      {
+        "Len": {
+          "expected": 3
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 62
+        }
+      },
+      {
+        "Len": {
+          "expected": 4
+        }
+      }
+    ]
+  },
+  {
+    "description": "new arrival after a preference dequeue ranks younger than older animals of the other species",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 12
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 3
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 24
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 3
+          }
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 1
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 12
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 24
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 1
+          }
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      }
+    ]
+  },
+  {
+    "description": "arrival stamp must not come from len: dog tie after dequeue_dog",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 33
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 38
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 33
+          }
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 37
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 38
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 37
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "arrival stamp must not come from len: cat tie after dequeue_cat",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 19
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 24
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 19
+          }
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 35
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 24
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 35
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      }
+    ]
+  },
+  {
+    "description": "longer mixed run",
+    "operations": [
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 74
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 28
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 22
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 36
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 2
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 46
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 50
+        }
+      },
+      {
+        "Len": {
+          "expected": 7
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 28
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 74
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Cat",
+            "id": 22
+          }
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 41
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Dog",
+          "id": 86
+        }
+      },
+      {
+        "Len": {
+          "expected": 6
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": false
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 36
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 46
+          }
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 41
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 2
+          }
+        }
+      },
+      {
+        "Enqueue": {
+          "species": "Cat",
+          "id": 30
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": {
+            "species": "Dog",
+            "id": 50
+          }
+        }
+      },
+      {
+        "Len": {
+          "expected": 2
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": {
+            "species": "Dog",
+            "id": 86
+          }
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueDog": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueCat": {
+          "expected": {
+            "species": "Cat",
+            "id": 30
+          }
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "DequeueAny": {
+          "expected": null
+        }
+      },
+      {
+        "IsEmpty": {
+          "expected": true
+        }
+      },
+      {
+        "Len": {
+          "expected": 0
+        }
+      }
+    ]
+  }
+]
