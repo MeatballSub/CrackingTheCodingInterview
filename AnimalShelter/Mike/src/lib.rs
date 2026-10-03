@@ -1,7 +1,6 @@
 pub mod test;
 
 use std::collections::VecDeque;
-
 use serde::Deserialize;
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
@@ -28,38 +27,79 @@ pub struct Animal {
 pub struct AnimalShelter {
     dogs: VecDeque<Animal>,
     cats: VecDeque<Animal>,
+    arrivals: VecDeque<Animal>,
 }
 
 impl AnimalShelter {
     pub fn new() -> Self {
-        todo!()
+        AnimalShelter{
+            dogs: VecDeque::new(),
+            cats: VecDeque::new(),
+            arrivals: VecDeque::new(),
+        }
     }
 
     pub fn enqueue(&mut self, animal: Animal) {
-        todo!()
+        self.arrivals.push_back(animal);
+        match animal.species {
+            Species::Dog => {
+                self.dogs.push_back(animal);
+            },
+            Species::Cat => {
+                self.cats.push_back(animal);
+            },
+        }
     }
 
     // Adopts the oldest animal of either species.
     pub fn dequeue_any(&mut self) -> Option<Animal> {
-        todo!()
+        match(self.dogs.is_empty(), self.cats.is_empty()) {
+            (true, true) => None,
+            (false, true) =>  self.dequeue_dog(),
+            (true, false) =>  self.dequeue_cat(),
+            (false, false) => {
+                let oldest_animal = self.calc_oldest();
+                oldest_animal
+            }
+        }
+
     }
 
     // Adopts the oldest dog.
     pub fn dequeue_dog(&mut self) -> Option<Animal> {
-        todo!()
+        let dog_to_remove= self.dogs.pop_front();
+        self.remove_arrival(dog_to_remove?);
+
+        dog_to_remove
     }
 
     // Adopts the oldest cat.
     pub fn dequeue_cat(&mut self) -> Option<Animal> {
-        todo!()
+       let cat_to_remove= self.cats.pop_front();
+       self.remove_arrival(cat_to_remove?);
+
+        cat_to_remove
+    }
+
+    fn remove_arrival(&mut self, animal_to_remove: Animal) {
+        if let Some(i) = self.arrivals.iter().position(|&animal| animal == animal_to_remove) {
+            self.arrivals.remove(i);
+        }
     }
 
     pub fn is_empty(&self) -> bool {
-        todo!()
+        self.dogs.is_empty() && self.cats.is_empty()
     }
 
     pub fn len(&self) -> usize {
-        todo!()
+        self.dogs.len() + self.cats.len()
+    }
+
+    fn calc_oldest(&mut self) -> Option<Animal> {
+        match self.arrivals.front()?.species {
+            Species::Dog => self.dequeue_dog(),
+            Species::Cat => self.dequeue_cat(),
+        }
     }
 }
 
