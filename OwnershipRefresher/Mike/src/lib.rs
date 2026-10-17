@@ -10,14 +10,14 @@
 // no compiler warnings, and default cargo clippy clean.
 
 #[must_use]
-pub fn contains_word(text: String, word: String) -> bool {
+pub fn contains_word(text:&str, word: &str) -> bool {
     text
         .split_whitespace()
         .any(|w| w.to_string() == word)
 }
 
 #[must_use]
-pub fn total_len(words: Vec<String>) -> usize {
+pub fn total_len(words: &[String]) -> usize {
     let mut total = 0;
     for w in words {
         total += w.len();
@@ -26,21 +26,21 @@ pub fn total_len(words: Vec<String>) -> usize {
 }
 
 #[must_use]
-pub fn first_capitalized(names: &Vec<String>) -> Option<&str> {
+pub fn first_capitalized(names: &[String]) -> Option<&str> {
     names
         .iter()
         .find(|n| n.starts_with(char::is_uppercase)).map(|x| x.as_str())
 }
 
 #[must_use]
-pub fn sum_evens(values: &Vec<i32>) -> i32 {
+pub fn sum_evens(values: &[i32]) -> i32 {
     values.iter().filter(|x| *x % 2 == 0).sum()
 }
 
 pub fn swap_names(a: &mut String, b: &mut String) {
     std::mem::swap(a, b);
 }
-pub fn replace_label(labels: &mut Vec<String>, index: usize, new_label: String) -> String {
+pub fn replace_label(labels: &mut [String], index: usize, new_label: String) -> String {
     let old = labels[index].to_string();
     labels[index] = new_label;
     old
@@ -86,19 +86,19 @@ mod tests {
     #[test]
     fn contains() {
         assert!(contains_word(
-            "the quick fox".to_string(),
-            "quick".to_string()
+            "the quick fox",
+            "quick"
         ));
         assert!(!contains_word(
-            "the quick fox".to_string(),
-            "qui".to_string()
+            "the quick fox",
+            "qui"
         ));
     }
 
     #[test]
     fn total() {
         let words = vec!["ab".to_string(), "cde".to_string()];
-        assert_eq!(total_len(words.clone()), 5);
+        assert_eq!(total_len(&words), 5);
     }
 
     #[test]
