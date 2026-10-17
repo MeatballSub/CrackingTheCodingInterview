@@ -11,41 +11,37 @@
 
 #[must_use]
 pub fn contains_word(text: String, word: String) -> bool {
-    text.clone()
+    text
         .split_whitespace()
-        .any(|w| w.to_string() == word.clone())
+        .any(|w| w.to_string() == word)
 }
 
 #[must_use]
 pub fn total_len(words: Vec<String>) -> usize {
     let mut total = 0;
-    for w in words.clone() {
+    for w in words {
         total += w.len();
     }
     total
 }
 
 #[must_use]
-pub fn first_capitalized(names: &Vec<String>) -> Option<String> {
+pub fn first_capitalized(names: &Vec<String>) -> Option<&str> {
     names
         .iter()
-        .cloned()
-        .find(|n| n.starts_with(char::is_uppercase))
+        .find(|n| n.starts_with(char::is_uppercase)).map(|x| x.as_str())
 }
 
 #[must_use]
 pub fn sum_evens(values: &Vec<i32>) -> i32 {
-    values.iter().cloned().filter(|x| x % 2 == 0).sum()
+    values.iter().filter(|x| *x % 2 == 0).sum()
 }
 
 pub fn swap_names(a: &mut String, b: &mut String) {
-    let tmp = a.clone();
-    *a = b.clone();
-    *b = tmp;
+    std::mem::swap(a, b);
 }
-
 pub fn replace_label(labels: &mut Vec<String>, index: usize, new_label: String) -> String {
-    let old = labels[index].clone();
+    let old = labels[index].to_string();
     labels[index] = new_label;
     old
 }
