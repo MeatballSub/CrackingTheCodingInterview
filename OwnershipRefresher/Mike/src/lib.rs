@@ -73,8 +73,12 @@ impl Inbox {
         self.messages.len()
     }
     pub fn take_all(&mut self) -> Vec<String> {
-        let all = self.messages.clone();
-        self.messages.clear();
+        // This approach was taken because I needed to: 
+        // A). Completely empty out self.messages
+        // B). But also I need to 'use' them (by returning them). 
+        // Drain creates an iterator and uses it to gnab all the elements. Per our conversation,
+        // This 'iterator copy' should be much cheaper than a full blown clone() operation.
+        let all = self.messages.drain(..).collect();
         all
     }
 }
